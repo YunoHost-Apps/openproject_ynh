@@ -16,7 +16,7 @@ admindoc = "https://www.openproject.org/docs/"
 code = "https://github.com/opf/openproject"
 
 [integration]
-yunohost = ">= 11.1.19"
+yunohost = ">= 11.2"
 architectures = "all"
 multi_instance = false
 ldap = false
@@ -28,7 +28,6 @@ ram.runtime = "1500M"
 [install]
     [install.domain]
     type = "domain"
-    full_domain = true
 
     [install.init_main_permission]
     help.en = "Set to visitors, Openproject could be less secure depending on your configuration, but it can allow visitors to participate to project management."
