@@ -5,7 +5,7 @@ name = "OpenProject"
 description.en = "Web-based project management software"
 description.fr = "Logiciel en ligne de gestion de projet"
 
-version = "12.5.8~ynh1"
+version = "14.x~ynh1"
 
 maintainers = ["Moutonjr \"Geoff\""]
 
@@ -61,7 +61,7 @@ ram.runtime = "1500M"
     [resources.apt]
     packages = "apt-transport-https memcached postgresql postgresql-common"
 
-    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/12/debian 11 main"
+    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/14/debian 11 main"
     extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
     extras.openproject.packages = "openproject"
 
