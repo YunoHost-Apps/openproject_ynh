@@ -5,7 +5,7 @@ Il NE doit PAS être modifié à la main.
 
 # OpenProject pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/openproject.svg)](https://dash.yunohost.org/appci/app/openproject) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/openproject.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/openproject.maintain.svg)
+[![Niveau d’intégration](https://dash.yunohost.org/integration/openproject.svg)](https://ci-apps.yunohost.org/ci/apps/openproject/) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/openproject.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/openproject.maintain.svg)
 
 [![Installer OpenProject avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=openproject)
 

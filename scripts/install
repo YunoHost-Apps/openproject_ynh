@@ -64,12 +64,12 @@ chmod 750 "/etc/openproject/"
 chmod -R o-rwx "/etc/openproject/"
 chown -R $app:$app "/etc/openproject/"
 
-ynh_exec_warn_less openproject config:set PORT=$port
-ynh_exec_warn_less openproject config:set SERVER_PROTOCOL_FORCE_HTTPS="true"
-ynh_exec_warn_less openproject config:set SERVER_HOSTNAME=$domain
-ynh_exec_warn_less openproject config:set SERVER_PATH_PREFIX=$path
+openproject config:set PORT=$port
+openproject config:set SERVER_PROTOCOL_FORCE_HTTPS="true"
+openproject config:set SERVER_HOSTNAME=$domain
+openproject config:set SERVER_PATH_PREFIX=$path
 
-ynh_exec_warn_less openproject configure >> "$YNH_STDINFO"
+openproject configure
 
 #=================================================
 # GENERIC FINALIZATION
