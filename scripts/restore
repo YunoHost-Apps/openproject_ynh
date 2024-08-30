@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 # Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
@@ -15,60 +9,58 @@ source /usr/share/yunohost/helpers
 #=================================================
 # RESTORE THE NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Restoring the NGINX web server configuration..."
+ynh_script_progression "Restoring the NGINX web server configuration..."
 
-ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
+ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
 # RESTORE THE POSTGRESQL DATABASE
 #=================================================
-ynh_script_progression --message="Restoring the PostgreSQL database..."
+ynh_script_progression "Restoring the PostgreSQL database..."
 
-ynh_psql_execute_file_as_root --file="./db.sql" --database=$db_name
+ynh_psql_db_shell  < "./db.sql""
 
 #=================================================
 # RESTORE VARIOUS FILES
 #=================================================
-ynh_script_progression --message="Restoring various files..."
+ynh_script_progression "Restoring various files..."
 
-ynh_restore_file --origin_path="/etc/openproject/"
+ynh_restore "/etc/openproject/"
 
 chmod 750 "/etc/openproject/"
 chmod -R o-rwx "/etc/openproject/"
 chown -R $app:$app "/etc/openproject/"
 
-ynh_exec_warn_less openproject config:set PORT=$port
-ynh_exec_warn_less openproject config:set SERVER_PROTOCOL_FORCE_HTTPS="true"
-ynh_exec_warn_less openproject config:set SERVER_HOSTNAME=$domain
-ynh_exec_warn_less openproject config:set SERVER_PATH_PREFIX=$path
+ynh_hide_warnings openproject config:set PORT=$port
+ynh_hide_warnings openproject config:set SERVER_PROTOCOL_FORCE_HTTPS="true"
+ynh_hide_warnings openproject config:set SERVER_HOSTNAME=$domain
+ynh_hide_warnings openproject config:set SERVER_PATH_PREFIX=$path
 
-ynh_exec_warn_less openproject configure >> "$YNH_STDINFO"
+ynh_hide_warnings openproject configure >> "$YNH_STDINFO"
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-ynh_script_progression --message="Integrating service in YunoHost..."
+ynh_script_progression "Integrating service in YunoHost..."
 
 yunohost service add $app --description="Web-based project management software" --log=systemd
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..."
+ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
+ynh_systemctl --service=$app --action="start" --log_path="systemd"
 
-#=================================================
-# GENERIC FINALIZATION
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..."
+ynh_script_progression "Reloading NGINX web server..."
 
-ynh_systemd_action --service_name=nginx --action=reload
+ynh_systemctl --service=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Restoration completed for $app"
+ynh_script_progression "Restoration completed for $app"
