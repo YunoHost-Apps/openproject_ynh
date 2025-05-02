@@ -13,22 +13,22 @@ source /usr/share/yunohost/helpers
 
 # Installer variables
 _homedir="/var/$app/"
-ynh_app_setting_set --app=$app --key=_homedir --value=$_homedir
+ynh_app_setting_set --key=_homedir --value=$_homedir
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring NGINX web server..."
+ynh_script_progression "Configuring NGINX web server..."
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 #=================================================
 # SPECIFIC SETUP
 #=================================================
 # OPENPROJECT CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring OpenProject..."
+ynh_script_progression "Configuring OpenProject..."
 
 mkdir -p "/etc/openproject/"
 _openproject_install_dat="/etc/openproject/installer.dat"
@@ -57,7 +57,7 @@ server/hostname $domain
 server/ssl no
 EOF
 
-ynh_store_file_checksum --file="$_openproject_install_dat"
+ynh_store_file_checksum "$_openproject_install_dat"
 
 chmod 750 "/etc/openproject/"
 chmod -R o-rwx "/etc/openproject/"
@@ -68,26 +68,24 @@ openproject config:set SERVER_PROTOCOL_FORCE_HTTPS="true"
 openproject config:set SERVER_HOSTNAME=$domain
 openproject config:set SERVER_PATH_PREFIX=$path
 
-openproject configure
+ynh_hide_warnings openproject configure
 
-#=================================================
-# GENERIC FINALIZATION
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-ynh_script_progression --message="Integrating service in YunoHost..."
+ynh_script_progression "Integrating service in YunoHost..."
 
 yunohost service add $app --description="Web-based project management software" --log="systemd"
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..."
+ynh_script_progression "Starting $app's systemd service..."
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd"
+ynh_systemctl --service=$app --action="start" --log_path="systemd"
 
-if [ ${PACKAGE_CHECK_EXEC:-0} -eq 1 ]; then
+if ynh_in_ci_tests; then
 	sleep 60
 fi
 
@@ -95,4 +93,4 @@ fi
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed"
+ynh_script_progression "Installation of $app completed"
