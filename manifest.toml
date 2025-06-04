@@ -5,7 +5,7 @@ name = "OpenProject"
 description.en = "Web-based project management software"
 description.fr = "Logiciel en ligne de gestion de projet"
 
-version = "15.1.0~ynh1"
+version = "15.5.0~ynh1"
 
 maintainers = ["Moutonjr \"Geoff\""]
 
@@ -17,7 +17,8 @@ code = "https://github.com/opf/openproject"
 cpe = "cpe:2.3:a:openproject:openproject"
 
 [integration]
-yunohost = ">= 11.2.30"
+yunohost = ">= 12.0.9"
+helpers_version = "2.1"
 architectures = "all"
 multi_instance = false
 
@@ -49,15 +50,10 @@ ram.runtime = "1500M"
 [resources]
 
     [resources.system_user]
-    # This will provision/deprovision a unix system user
 
     [resources.install_dir]
-    # This will create/remove the install dir as /var/www/$app
-    # and store the corresponding setting $install_dir
 
     [resources.permissions]
-    # This will configure SSOwat permission for $domain/$path/
-    # The initial allowed group of user is configured via the init_main_permission question (public=visitors, private=all_users)
     main.url = "/"
     api.url = "/api"
     api.allowed = "visitors"
@@ -66,11 +62,8 @@ ram.runtime = "1500M"
     api.protected = true
 
     [resources.ports]
-    # This will pick a random port for reverse-proxying and store it as the $port setting
 
     [resources.apt]
-    # This will automatically install/uninstall the following apt packages
-    # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
     packages = [
         "apt-transport-https",
         "memcached",
@@ -83,5 +76,4 @@ ram.runtime = "1500M"
     extras.openproject.packages = "openproject"
 
     [resources.database]
-    # This will automatically provision/deprovison a DB and store the corresponding credentials in settings $db_user, $db_name, $db_pwd
     type = "postgresql"
