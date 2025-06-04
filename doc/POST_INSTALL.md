@@ -1,1 +1,1 @@
-* default user and password is admin / admin
+* Default user and password is admin / admin

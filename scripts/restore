@@ -5,8 +5,6 @@ source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# STANDARD RESTORATION STEPS
-#=================================================
 # RESTORE THE NGINX CONFIGURATION
 #=================================================
 ynh_script_progression "Restoring the NGINX web server configuration..."
@@ -18,7 +16,7 @@ ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 #=================================================
 ynh_script_progression "Restoring the PostgreSQL database..."
 
-ynh_psql_db_shell  < "./db.sql"
+ynh_psql_db_shell  < ./db.sql
 
 #=================================================
 # RESTORE VARIOUS FILES

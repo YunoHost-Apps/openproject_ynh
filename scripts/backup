@@ -13,8 +13,6 @@ ynh_print_info "Declaring files to be backed up..."
 ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
-# SPECIFIC BACKUP
-#=================================================
 # BACKUP VARIOUS FILES
 #=================================================
 
