@@ -82,7 +82,7 @@ ram.runtime = "1500M"
     packages = [
         "apt-transport-https",
         "memcached",
-        "postgresql",
+        "postgresql-15",
         "postgresql-common",
         ]
 
