@@ -22,6 +22,9 @@ ynh_config_change_url_nginx
 #=================================================
 
 openproject config:set OPENPROJECT_HOST__NAME=$new_domain
+openproject config:set SERVER_PATH_PREFIX=$new_path
+openproject config:set OPENPROJECT_RAILS_RELATIVE_URL_ROOT=$new_path
+openproject config:set RAILS_RELATIVE_URL_ROOT=$new_path
 
 #=================================================
 # START SYSTEMD SERVICE
