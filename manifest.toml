@@ -34,6 +34,10 @@ ram.runtime = "1500M"
     [install.domain]
     type = "domain"
 
+    [install.path]
+    type = "path"
+    default = "/openproject"
+
     [install.init_main_permission]
     help.en = "Set to visitors, Openproject could be less secure depending on your configuration, but it can allow visitors to participate to project management."
     help.fr = "Réglée sur visiteurs, Openproject peut être moins sécurisée en fonction de votre configuration, mais elle peut permettre aux visiteurs de participer à la gestion du projet."
@@ -60,6 +64,17 @@ ram.runtime = "1500M"
     api.auth_header = false
     api.show_tile = false
     api.protected = true
+    ical.url = "/.*ical"
+    ical.allowed = "visitors"
+    ical.auth_header = false
+    ical.show_tile = false
+    ical.protected = true
+    oauth.url = "/oauth"
+    oauth.allowed = "visitors"
+    oauth.auth_header = false
+    oauth.show_tile = false
+    oauth.protected = true
+
 
     [resources.ports]
 
