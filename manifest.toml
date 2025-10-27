@@ -52,6 +52,12 @@ ram.runtime = "1500M"
     default = "en"
 
 [resources]
+    [resources.apt]
+    packages = ["apt-transport-https", "memcached", "postgresql-15", "postgresql-common"]
+
+    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/15/debian __YNH_DEBIAN_VERSION_ID__ main"
+    extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
+    extras.openproject.packages = "openproject"
 
     [resources.system_user]
 
@@ -75,15 +81,7 @@ ram.runtime = "1500M"
     oauth.show_tile = false
     oauth.protected = true
 
-
     [resources.ports]
-
-    [resources.apt]
-    packages = ["apt-transport-https", "memcached", "postgresql-15", "postgresql-common"]
-
-    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/15/debian __YNH_DEBIAN_VERSION_ID__ main"
-    extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
-    extras.openproject.packages = "openproject"
 
     [resources.database]
     type = "postgresql"
