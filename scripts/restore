@@ -1,22 +1,13 @@
 #!/bin/bash
 
-# Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
-source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
-
-#=================================================
-# RESTORE THE NGINX CONFIGURATION
-#=================================================
-ynh_script_progression "Restoring the NGINX web server configuration..."
-
-ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
 # RESTORE THE POSTGRESQL DATABASE
 #=================================================
 ynh_script_progression "Restoring the PostgreSQL database..."
 
-ynh_psql_db_shell  < ./db.sql
+ynh_psql_db_shell < ./db.sql
 
 #=================================================
 # RESTORE VARIOUS FILES
@@ -37,27 +28,24 @@ ynh_hide_warnings openproject config:set SERVER_PATH_PREFIX=$path
 ynh_hide_warnings openproject configure >> "$YNH_STDINFO"
 
 #=================================================
-# INTEGRATE SERVICE IN YUNOHOST
+# RESTORE SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression "Integrating service in YunoHost..."
+ynh_script_progression "Restoring system configurations related to $app..."
+
+ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 yunohost service add $app --description="Web-based project management software" --log=systemd
 
 #=================================================
-# START SYSTEMD SERVICE
+# RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
 #=================================================
-ynh_script_progression "Starting $app's systemd service..."
+ynh_script_progression "Reloading NGINX web server and $app's service..."
 
 ynh_systemctl --service=$app --action="start" --log_path="systemd"
 
 if ynh_in_ci_tests; then
 	sleep 60
 fi
-
-#=================================================
-# RELOAD NGINX
-#=================================================
-ynh_script_progression "Reloading NGINX web server..."
 
 ynh_systemctl --service=nginx --action=reload
 
