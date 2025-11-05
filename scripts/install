@@ -15,14 +15,6 @@ _homedir="/var/$app/"
 ynh_app_setting_set --key=_homedir --value=$_homedir
 
 #=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression "Configuring NGINX web server..."
-
-# Create a dedicated NGINX config
-ynh_config_add_nginx
-
-#=================================================
 # OPENPROJECT CONFIGURATION
 #=================================================
 ynh_script_progression "Configuring OpenProject..."
@@ -68,9 +60,11 @@ openproject config:set SERVER_PATH_PREFIX=$path
 ynh_hide_warnings openproject configure
 
 #=================================================
-# INTEGRATE SERVICE IN YUNOHOST
+# SYSTEM CONFIGURATION
 #=================================================
-ynh_script_progression "Integrating service in YunoHost..."
+ynh_script_progression "Adding system configurations related to $app..."
+
+ynh_config_add_nginx
 
 yunohost service add $app --description="Web-based project management software" --log="systemd"
 
