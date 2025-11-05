@@ -17,18 +17,17 @@ code = "https://github.com/opf/openproject"
 cpe = "cpe:2.3:a:openproject:openproject"
 
 [integration]
-yunohost = ">= 12.0.9"
+yunohost = ">= 12.1.17"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = false
 
 ldap = false
-
 sso = false
 
-disk = "50M"
-ram.build = "800M"
-ram.runtime = "1500M"
+disk = "3800M"
+ram.build = "1700M"
+ram.runtime = "1700M"
 
 [install]
     [install.domain]
@@ -48,20 +47,10 @@ ram.runtime = "1500M"
     ask.en = "Choose the application language"
     ask.fr = "Choisissez la langue de l'application"
     type = "select"
-    choices = ["fr", "en"]
-    default = "en"
+    choices = ["de", "en", "es", "fr", "it", "nl", "pt"]
+    default = "fr"
 
 [resources]
-    [resources.apt]
-    packages = ["apt-transport-https", "memcached", "postgresql-common"]
-
-    extras.postgresql16.repo = "deb https://apt.postgresql.org/pub/repos/apt __YNH_DEBIAN_VERSION__-pgdg main"
-    extras.postgresql16.key = "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
-    extras.postgresql16.packages = "postgresql-16"
-
-    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/16/debian __YNH_DEBIAN_VERSION_ID__ main"
-    extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
-    extras.openproject.packages = "openproject"
 
     [resources.system_user]
 
@@ -87,5 +76,16 @@ ram.runtime = "1500M"
 
     [resources.ports]
 
+    [resources.apt]
+    packages = ["apt-transport-https", "memcached", "postgresql-common"]
+
+    extras.postgresql16.repo = "deb https://apt.postgresql.org/pub/repos/apt __YNH_DEBIAN_VERSION__-pgdg main"
+    extras.postgresql16.key = "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+    extras.postgresql16.packages = "postgresql-16"
+
+    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/16/debian __YNH_DEBIAN_VERSION_ID__ main"
+    extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
+    extras.openproject.packages = "openproject"
+    
     [resources.database]
     type = "postgresql"

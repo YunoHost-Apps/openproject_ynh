@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -11,17 +10,11 @@ ynh_script_progression "Stopping $app's systemd service..."
 ynh_systemctl --service=$app --action="stop" --log_path="systemd"
 
 #=================================================
-# NGINX CONFIGURATION
+# REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression "Upgrading NGINX web server configuration..."
+ynh_script_progression "Upgrading system configurations related to $app..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression "Integrating service in YunoHost..."
 
 yunohost service add $app --description="Web-based project management software" --log=systemd
 

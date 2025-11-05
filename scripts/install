@@ -4,7 +4,6 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -14,14 +13,6 @@ source /usr/share/yunohost/helpers
 # Installer variables
 _homedir="/var/$app/"
 ynh_app_setting_set --key=_homedir --value=$_homedir
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression "Configuring NGINX web server..."
-
-# Create a dedicated NGINX config
-ynh_config_add_nginx
 
 #=================================================
 # OPENPROJECT CONFIGURATION
@@ -71,9 +62,11 @@ openproject config:set RAILS_RELATIVE_URL_ROOT=$path
 ynh_hide_warnings openproject configure
 
 #=================================================
-# INTEGRATE SERVICE IN YUNOHOST
+# SYSTEM CONFIGURATION
 #=================================================
-ynh_script_progression "Integrating service in YunoHost..."
+ynh_script_progression "Adding system configurations related to $app..."
+
+ynh_config_add_nginx
 
 yunohost service add $app --description="Web-based project management software" --log="systemd"
 
