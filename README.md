@@ -20,7 +20,7 @@ Web-based project management software
 
 
 ## Screenshots
-![Screenshot of OpenProject](./doc/screenshots/screenshot1.png)
+![Screenshot of OpenProject](./doc/screenshots/screenshot.png)
 
 ## 📦 Developer info
 
