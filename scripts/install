@@ -14,6 +14,10 @@ source /usr/share/yunohost/helpers
 _homedir="/var/$app/"
 ynh_app_setting_set --key=_homedir --value=$_homedir
 
+#adding /home/openproject for config to work without warning
+mkdir -p /home/openproject
+chown $app:$app /home/openproject
+
 #=================================================
 # OPENPROJECT CONFIGURATION
 #=================================================
