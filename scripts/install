@@ -16,6 +16,8 @@ ynh_app_setting_set --key=_homedir --value=$_homedir
 
 #adding /home/openproject for config to work without warning
 mkdir -p /home/openproject
+chown -R $app:$app /home/openproject
+chown -R $app:$app /var/db/openproject
 
 #=================================================
 # OPENPROJECT CONFIGURATION
@@ -80,8 +82,6 @@ ynh_script_progression "Starting $app's systemd service..."
 
 # Start a systemd service
 ynh_systemctl --service=$app --action="start" --log_path="systemd"
-
-chown -R $app:$app /home/openproject
 
 if ynh_in_ci_tests; then
 	sleep 60
