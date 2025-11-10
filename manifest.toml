@@ -77,11 +77,11 @@ ram.runtime = "1700M"
     [resources.ports]
 
     [resources.apt]
-    packages = ["apt-transport-https", "memcached", "postgresql-common"]
+    packages = ["apt-transport-https"]
 
     extras.postgresql16.repo = "deb https://apt.postgresql.org/pub/repos/apt __YNH_DEBIAN_VERSION__-pgdg main"
     extras.postgresql16.key = "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
-    extras.postgresql16.packages = "postgresql"
+    extras.postgresql16.packages = ["postgresql-16", "postgresql-common", "memcached"]
 
     extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/16/debian __YNH_DEBIAN_VERSION_ID__ main"
     extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
