@@ -14,6 +14,11 @@ source /usr/share/yunohost/helpers
 _homedir="/var/$app/"
 ynh_app_setting_set --key=_homedir --value=$_homedir
 
+#adding /home/openproject for config to work without warning
+mkdir -p /home/openproject
+chown -R $app:$app /home/openproject
+chown -R $app:$app /var/db/openproject
+
 #=================================================
 # OPENPROJECT CONFIGURATION
 #=================================================
@@ -56,6 +61,8 @@ openproject config:set PORT=$port
 openproject config:set SERVER_PROTOCOL_FORCE_HTTPS="true"
 openproject config:set SERVER_HOSTNAME=$domain
 openproject config:set SERVER_PATH_PREFIX=$path
+openproject config:set OPENPROJECT_RAILS_RELATIVE_URL_ROOT=$path
+openproject config:set RAILS_RELATIVE_URL_ROOT=$path
 
 ynh_hide_warnings openproject configure
 

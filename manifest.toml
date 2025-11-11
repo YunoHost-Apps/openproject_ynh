@@ -33,6 +33,10 @@ ram.runtime = "1700M"
     [install.domain]
     type = "domain"
 
+    [install.path]
+    type = "path"
+    default = "/openproject"
+
     [install.init_main_permission]
     help.en = "Set to visitors, Openproject could be less secure depending on your configuration, but it can allow visitors to participate to project management."
     help.fr = "Réglée sur visiteurs, Openproject peut être moins sécurisée en fonction de votre configuration, mais elle peut permettre aux visiteurs de participer à la gestion du projet."
@@ -59,20 +63,29 @@ ram.runtime = "1700M"
     api.auth_header = false
     api.show_tile = false
     api.protected = true
+    ical.url = "/.*ical"
+    ical.allowed = "visitors"
+    ical.auth_header = false
+    ical.show_tile = false
+    ical.protected = true
+    oauth.url = "/oauth"
+    oauth.allowed = "visitors"
+    oauth.auth_header = false
+    oauth.show_tile = false
+    oauth.protected = true
 
     [resources.ports]
 
     [resources.apt]
-    packages = [
-        "apt-transport-https",
-        "memcached",
-        "postgresql",
-        "postgresql-common",
-        ]
+    packages = ["apt-transport-https", "postgresql"]
+
+    extras.postgresql16.repo = "deb https://apt.postgresql.org/pub/repos/apt __YNH_DEBIAN_VERSION__-pgdg main"
+    extras.postgresql16.key = "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+    extras.postgresql16.packages = ["postgresql-16", "postgresql-common", "memcached"]
 
     extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/16/debian __YNH_DEBIAN_VERSION_ID__ main"
     extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
     extras.openproject.packages = "openproject"
-
+    
     [resources.database]
     type = "postgresql"
