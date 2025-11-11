@@ -77,7 +77,7 @@ ram.runtime = "1700M"
     [resources.ports]
 
     [resources.apt]
-    packages = ["apt-transport-https"]
+    packages = ["apt-transport-https", "postgresql"]
 
     extras.postgresql16.repo = "deb https://apt.postgresql.org/pub/repos/apt __YNH_DEBIAN_VERSION__-pgdg main"
     extras.postgresql16.key = "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
