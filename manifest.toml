@@ -5,7 +5,7 @@ name = "OpenProject"
 description.en = "Web-based project management software"
 description.fr = "Logiciel en ligne de gestion de projet"
 
-version = "16.5.1~ynh1"
+version = "16.5.1~ynh2"
 
 maintainers = ["Moutonjr \"Geoff\""]
 
@@ -19,7 +19,7 @@ cpe = "cpe:2.3:a:openproject:openproject"
 [integration]
 yunohost = ">= 12.1.17"
 helpers_version = "2.1"
-architectures = "all"
+architectures = ["amd64"]
 multi_instance = false
 
 ldap = false
