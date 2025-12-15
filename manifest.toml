@@ -19,7 +19,7 @@ cpe = "cpe:2.3:a:openproject:openproject"
 [integration]
 yunohost = ">= 12.1.17"
 helpers_version = "2.1"
-architectures = "all"
+architectures = ["amd64"]
 multi_instance = false
 
 ldap = false
