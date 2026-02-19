@@ -14,9 +14,9 @@ source /usr/share/yunohost/helpers
 _homedir="/var/$app/"
 ynh_app_setting_set --key=_homedir --value=$_homedir
 
-##
-# DB SETUP
-##
+#=================================================
+# DATABASE SETUP
+#=================================================
 
 ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS btree_gist;"
 ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
