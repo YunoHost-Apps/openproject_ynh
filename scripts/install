@@ -14,6 +14,15 @@ source /usr/share/yunohost/helpers
 _homedir="/var/$app/"
 ynh_app_setting_set --key=_homedir --value=$_homedir
 
+##
+# DB SETUP
+##
+
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS btree_gist;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS unaccent;"
+ynh_psql_db_shell <<< "CREATE COLLATION IF NOT EXISTS versions_name (provider = icu, locale = "und-u-kn-true");"
+
 #=================================================
 # OPENPROJECT CONFIGURATION
 #=================================================
