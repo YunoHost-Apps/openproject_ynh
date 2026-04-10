@@ -21,6 +21,9 @@ ynh_safe_rm "$_homedir"
 # Remove a directory securely
 ynh_safe_rm "/etc/openproject"
 
+#removing /home/openproject
+ynh_safe_rm "/home/openproject"
+
 #=================================================
 # END OF SCRIPT
 #=================================================

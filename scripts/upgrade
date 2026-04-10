@@ -16,6 +16,18 @@ ynh_script_progression "Upgrading system configurations related to $app..."
 
 ynh_config_add_nginx
 
+#=================================================
+# CONFIGURE OPENPROJECT
+#=================================================
+ynh_script_progression "Configure openproject..."
+
+ynh_hide_warnings openproject configure
+
+#=================================================
+# INTEGRATE SERVICE IN YUNOHOST
+#=================================================
+ynh_script_progression "Integrating service in YunoHost..."
+
 yunohost service add $app --description="Web-based project management software" --log=systemd
 
 #=================================================
