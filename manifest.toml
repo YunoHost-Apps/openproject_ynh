@@ -68,11 +68,14 @@ ram.runtime = "1700M"
         "memcached",
         "postgresql",
         "postgresql-common",
-        ]
+    ]
 
-    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/17/debian __YNH_DEBIAN_VERSION_ID__ main"
-    extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
-    extras.openproject.packages = "openproject"
+    [resources.apt.extras.openproject]
+    repo = "https://packages.openproject.com/srv/deb/opf/openproject/stable/17/debian/ __YNH_DEBIAN_VERSION_ID__ main"
+    key = "https://packages.openproject.com/srv/deb/opf/openproject/gpg-key.gpg"
+    packages = [
+        "openproject"
+    ]
 
     [resources.database]
     type = "postgresql"
