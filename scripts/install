@@ -20,6 +20,15 @@ chown -R $app:$app /home/openproject
 chown -R $app:$app /var/db/openproject
 
 #=================================================
+# DATABASE SETUP
+#=================================================
+
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS btree_gist;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS unaccent;"
+ynh_psql_db_shell <<< 'CREATE COLLATION IF NOT EXISTS versions_name (provider = icu, locale = "und-u-kn-true");'
+
+#=================================================
 # OPENPROJECT CONFIGURATION
 #=================================================
 ynh_script_progression "Configuring OpenProject..."

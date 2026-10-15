@@ -10,6 +10,15 @@ ynh_script_progression "Stopping $app's systemd service..."
 ynh_systemctl --service=$app --action="stop" --log_path="systemd"
 
 #=================================================
+# DATABASE SETUP
+#=================================================
+
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS btree_gist;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS pg_trgm;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS unaccent;"
+ynh_psql_db_shell <<< 'CREATE COLLATION IF NOT EXISTS versions_name (provider = icu, locale = "und-u-kn-true");'
+
+#=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
