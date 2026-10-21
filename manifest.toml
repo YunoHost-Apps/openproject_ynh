@@ -79,7 +79,7 @@ ram.runtime = "1700M"
     [resources.apt]
     packages = ["apt-transport-https", "postgresql", "memcached"]
 
-    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/17/debian __YNH_DEBIAN_VERSION_ID__ main"
+    extras.openproject.repo = "deb https://dl.packager.io/srv/deb/opf/openproject/stable/17/debian 12 main"
     extras.openproject.key = "https://dl.packager.io/srv/opf/openproject/key"
     extras.openproject.packages = "openproject"
     
